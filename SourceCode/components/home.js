@@ -9,6 +9,7 @@ import DrawerLayout from 'react-native-drawer-layout';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import GridView from "react-native-easy-grid-view";
 import {
     AppRegistry,
     StyleSheet,
@@ -23,6 +24,7 @@ import {
     ScrollView
 } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+var Accordion = require('react-native-accordion');
 
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
