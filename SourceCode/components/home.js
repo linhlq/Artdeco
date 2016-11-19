@@ -30,7 +30,8 @@ var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          check: true
     }
 
     _changeState(check) {
