@@ -1,7 +1,10 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * @file   home.js
+ * @Author Nguyen Thanh Trung (nttrung95@yahoo.com)
+ * @date  19/11/2016
+ * @brief  Home page of the app.
+ *
+ * Main menu that will navigate users to all tabs.
  */
 
 import React, {Component} from 'react';
@@ -25,19 +28,31 @@ import {
 } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Accordion = require('react-native-accordion');
+var styles = require('../styles/home_styles.js');
 
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          check: true
+            check: true
+        };
     }
 
+    /**
+     * Function to change check state
+     *
+     *@param check whether the drawer is closed or not
+     *
+     */
     _changeState(check) {
         this.setState({check: check})
     }
 
+    /**
+     * Function to open/close drawer
+     *
+     */
     _openMenu() {
         if (this.state.check == true) {
             this.refs['DRAWER_REF'].openDrawer();
@@ -48,12 +63,63 @@ class Home extends Component {
         }
     }
 
+    /**
+     * Render the drawer page
+     *
+     */
     _navigationView() {
         return (
-            <View></View>
+            <View style={{
+                flex: 1,
+                backgroundColor: '#ffffff',
+                flexDirection: 'column'
+            }}>
+                <View style={{
+                    width: width * 3 / 4 + 40,
+                    height: height / 4 - 10,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Image resizeMode='contain' style={{
+                        width: width * 3 / 4 - 40,
+                        height: height / 4 - 50
+                    }} source={{
+                        uri: 'http://artdeco.com.vn/skin/frontend/default/artdeco.ver3.2/images/logo.png'
+                    }}/>
+                </View>
+                <View style={{
+                    marginLeft: 15,
+                    borderWidth: 1,
+                    borderColor: '#212121',
+                    width: width * 3 / 4 + 11
+                }}></View>
+                <View style={{
+                    marginTop: 3,
+                    marginBottom: 3,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Text style={{
+                        color: '#212121',
+                        fontSize: 20
+                    }}>
+                        Trang Điểm
+                    </Text>
+                </View>
+                <View style={{
+                    marginLeft: 15,
+                    borderWidth: 1,
+                    borderColor: '#212121',
+                    width: width * 3 / 4 + 11
+                }}></View>
+            </View>
         );
     }
 
+    /**
+     * Render the main home page
+     *
+     */
     render() {
         return (
             <DrawerLayout ref={'DRAWER_REF'} drawerWidth={width * 3 / 4 + 40} onDrawerOpen={() => {
@@ -63,8 +129,21 @@ class Home extends Component {
             }} drawerPosition={DrawerLayout.positions.Left} renderNavigationView={() => this._navigationView()}>
                 <View style={styles.home_layout}>
                     <View style={styles.bar_layout}>
-                        <View></View>
-                        <View></View>
+                        <View style={styles.bar_view}>
+                            <TouchableNativeFeedback onPress ={() => {
+                                this._openMenu()
+                            }}>
+                                <Icon name="bars" size={32} color="#fbfcfc"/>
+                            </TouchableNativeFeedback>
+                        </View>
+                        <View style={styles.artdeco_view}>
+                            <Text style={styles.artdeco_text}>ARTDECO</Text>
+                        </View>
+                        <View style={styles.shopping_view}>
+                            <TouchableNativeFeedback>
+                                <Icon name="shopping-cart" size={32} color="#fbfcfc"/>
+                            </TouchableNativeFeedback>
+                        </View>
                     </View>
                     <View style={styles.page_layout}></View>
                 </View>
@@ -72,36 +151,5 @@ class Home extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    home_layout: {
-        flex: 1,
-        backgroundColor: '#FAFAFA',
-        flexDirection: 'column'
-    },
-    bar_layout: {
-        flex: 0.1,
-        backgroundColor: '#212121',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    leftbar: {
-        flex: 0.5,
-        alignItems: 'flex-start',
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    rightbar: {
-        flex: 0.5,
-        alignItems: 'flex-end',
-        flexDirection: 'row',
-        justifyContent: 'center'
-    },
-    page_layout: {
-        flex: 0.9,
-        backgroundColor: '#e8e8e8'
-    }
-});
 
 module.exports = Home;
