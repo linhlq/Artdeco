@@ -69,22 +69,30 @@ class Home extends Component {
      */
     _renderMakeUp() {
     var header = (
-      <View style={...}>
-        <Text>Click to Expand</Text>
+      <View onPress={() => {this.refs.view.bounce(800)}}>
+        <Text style={{
+            color: '#212121',
+            fontSize: 20
+        }}>
+            Trang Điểm
+        </Text>
       </View>
     );
 
     var content = (
-      <View style={...}>
-        <Text>This content is hidden in the accordion</Text>
-      </View>
+      <Animatable.View ref="view">
+        <View><Text>Sản phẩm cho mắt</Text></View>
+        <View><Text>Sản phẩm cho mặt</Text></View>
+        <View><Text>Sản phẩm cho môi</Text></View>
+        <View><Text>Sản phẩm cho móng</Text></View>
+        <View><Text>Cọ và các phụ kiện khác</Text></View>
+      </Animatable.View>
     );
 
     return (
       <Accordion
         header={header}
         content={content}
-        easing="easeOutCubic"
       />
     );
   }
@@ -125,12 +133,7 @@ class Home extends Component {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Text style={{
-                        color: '#212121',
-                        fontSize: 20
-                    }}>
-                        Trang Điểm
-                    </Text>
+                  {this._renderMakeUp()}
                 </View>
                 <View style={{
                     marginLeft: 15,
