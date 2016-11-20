@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 
 var styles = require('../styles/home_styles.js');
-class MakeUp extends Component{
+class AccordionCustom extends Component{
     constructor(props){
         super(props);
 
@@ -32,7 +32,8 @@ class MakeUp extends Component{
     }
 
     toggle(){
-        let initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+        let
+        initialValue    = this.state.expanded? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
         finalValue      = this.state.expanded? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
 
        this.setState({
@@ -69,8 +70,7 @@ class MakeUp extends Component{
 
         return (
           <Animated.View style={[styles.makeup_container,{height: this.state.animation}]}>
-            <View
-                  style={styles.makeup_layout}
+            <View style={styles.makeup_layout}
                   onLayout={this._setMinHeight.bind(this)}>
                 <TouchableOpacity style={styles.title_container}>
                   <Text style={styles.makeup_text}>{this.state.title}</Text>
@@ -93,4 +93,4 @@ class MakeUp extends Component{
         );
     }
 }
-module.exports = MakeUp;
+module.exports = AccordionCustom;

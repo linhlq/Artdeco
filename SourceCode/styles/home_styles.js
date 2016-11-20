@@ -78,10 +78,12 @@ module.exports = StyleSheet.create({
       marginBottom: 5
     },
     accordion_padding: {
+      flex: 1,
       justifyContent: 'center',
       alignItems: 'flex-start'
     },
     accordion_comp: {
+      flex: 0.2,
       marginLeft: 40,
       padding: 2
     },

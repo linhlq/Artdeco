@@ -23,7 +23,7 @@ import {
     TouchableNativeFeedback,
     TouchableOpacity,
     Image,
-    InputText,
+    TextInput,
     ScrollView,
     TouchableHighlight,
     Animated
@@ -32,7 +32,7 @@ var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Accordion = require('react-native-accordion');
 
 var styles = require('../styles/home_styles.js');
-var MakeUp = require('./makeup_accordion.js');
+var AccordionCustom = require('./accordion_container.js');
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
@@ -86,16 +86,32 @@ class Home extends Component {
                 </View>
                 <View style={styles.line}></View>
                 <View style={styles.accordion_container}>
-                  <MakeUp title="Trang Điểm"
-                          style={styles.accordion_padding}>
-                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Cọ Và Dụng Cụ Khác</Text></TouchableOpacity>
-                  </MakeUp>
+                  <AccordionCustom title="Trang Điểm"
+                                   style={styles.accordion_padding}>
+                    <View style={{flex: 1, flexDirection: 'column'}}>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Cọ Và Dụng Cụ Khác</Text></TouchableOpacity>
+                    </View>
+                  </AccordionCustom>
                 </View>
                 <View style={styles.line}></View>
+                <View style={styles.accordion_container}>
+                  <AccordionCustom title="Sản Phẩm Dưỡng"
+                                   style={styles.accordion_padding}>
+                    <View style={{flex: 1, flexDirection: 'column'}}>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Mặt</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Cơ Thể</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Tay</Text></TouchableOpacity>
+                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Chân</Text></TouchableOpacity>
+                    </View>
+                  </AccordionCustom>
+                </View>
+                <View style={{backgroundColor: '#0a0e0a', marginTop: 3, width: width * 3 / 4 + 40, borderTopWidth: 1, borderColor: '#706b6e'}}>
+
+                </View>
             </ScrollView>
         );
     }
@@ -128,7 +144,16 @@ class Home extends Component {
                             </TouchableNativeFeedback>
                         </View>
                     </View>
-                    <View style={styles.page_layout}></View>
+                    <ScrollView style={styles.page_layout}>
+                      <TextInput
+                        style={{height: 40, borderColor: '#ecede7', borderWidth: 2, marginTop: 10, marginLeft: 40, marginRight: 40, borderBottomColor: '#b0b8b6'}}
+                        onChangeText={(text) => this.setState({text})}
+                        value={this.state.text}
+                        underlineColorAndroid="#ecede7"
+                        placeholder = "Search..."
+                        placeholderColor = "#b0b8b6"
+                      />
+                    </ScrollView>
                 </View>
             </DrawerLayout>
         );
