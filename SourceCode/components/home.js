@@ -29,7 +29,6 @@ import {
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Accordion = require('react-native-accordion');
 var styles = require('../styles/home_styles.js');
-
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
@@ -69,30 +68,26 @@ class Home extends Component {
      */
     _renderMakeUp() {
     var header = (
-      <View onPress={() => {this.refs.view.bounce(800)}}>
-        <Text style={{
-            color: '#212121',
-            fontSize: 20
-        }}>
-            Trang Điểm
-        </Text>
+      <View>
+        <Icon name="chevron-right" size={15} color="#212424"/>
       </View>
     );
 
     var content = (
-      <Animatable.View ref="view">
-        <View><Text>Sản phẩm cho mắt</Text></View>
-        <View><Text>Sản phẩm cho mặt</Text></View>
-        <View><Text>Sản phẩm cho môi</Text></View>
-        <View><Text>Sản phẩm cho móng</Text></View>
-        <View><Text>Cọ và các phụ kiện khác</Text></View>
-      </Animatable.View>
+      <View style={{}} >
+        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text ></View>
+        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text ></View>
+        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text ></View>
+        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text ></View>
+        <View><Text style={styles.makeupComp_text}>Cọ Và Các Phụ Kiện Khác</Text ></View>
+      </View>
     );
 
     return (
       <Accordion
         header={header}
         content={content}
+        easing="easeOutCubic"
       />
     );
   }
@@ -103,44 +98,22 @@ class Home extends Component {
      */
     _navigationView() {
         return (
-            <View style={{
-                flex: 1,
-                backgroundColor: '#ffffff',
-                flexDirection: 'column'
-            }}>
-                <View style={{
-                    width: width * 3 / 4 + 40,
-                    height: height / 4 - 10,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Image resizeMode='contain' style={{
-                        width: width * 3 / 4 - 40,
-                        height: height / 4 - 50
-                    }} source={{
-                        uri: 'http://artdeco.com.vn/skin/frontend/default/artdeco.ver3.2/images/logo.png'
-                    }}/>
+            <View style={styles.drawerLayout}>
+                <View style={styles.imageLayout}>
+                    <Image resizeMode='contain'
+                           style={styles.image_view}
+                           source={{uri: 'http://artdeco.com.vn/skin/frontend/default/artdeco.ver3.2/images/logo.png'}}/>
                 </View>
-                <View style={{
-                    marginLeft: 15,
-                    borderWidth: 1,
-                    borderColor: '#212121',
-                    width: width * 3 / 4 + 11
-                }}></View>
-                <View style={{
-                    marginTop: 3,
-                    marginBottom: 3,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                  {this._renderMakeUp()}
+                <View style={styles.line}></View>
+                <View style={styles.makeup_layout}>
+                  <View style={{flex:0.7, marginLeft: 15}}>
+                    <Text style={styles.makeup_text}>Trang Điểm</Text>
+                  </View>
+                  <View style={{flex:0.3, marginRight: 15}}>
+                    {this._renderMakeUp()}
+                  </View>
                 </View>
-                <View style={{
-                    marginLeft: 15,
-                    borderWidth: 1,
-                    borderColor: '#212121',
-                    width: width * 3 / 4 + 11
-                }}></View>
+                <View style={styles.line}></View>
             </View>
         );
     }
@@ -151,17 +124,16 @@ class Home extends Component {
      */
     render() {
         return (
-            <DrawerLayout ref={'DRAWER_REF'} drawerWidth={width * 3 / 4 + 40} onDrawerOpen={() => {
-                this._changeState(false)
-            }} onDrawerClose={() => {
-                this._changeState(true)
-            }} drawerPosition={DrawerLayout.positions.Left} renderNavigationView={() => this._navigationView()}>
+            <DrawerLayout ref={'DRAWER_REF'}
+                          drawerWidth={width * 3 / 4 + 40}
+                          onDrawerOpen={() => {this._changeState(false)}}
+                          onDrawerClose={() => {this._changeState(true)}}
+                          drawerPosition={DrawerLayout.positions.Left}
+                          renderNavigationView={() => this._navigationView()}>
                 <View style={styles.home_layout}>
                     <View style={styles.bar_layout}>
                         <View style={styles.bar_view}>
-                            <TouchableNativeFeedback onPress ={() => {
-                                this._openMenu()
-                            }}>
+                            <TouchableNativeFeedback onPress ={() => {this._openMenu()}}>
                                 <Icon name="bars" size={32} color="#fbfcfc"/>
                             </TouchableNativeFeedback>
                         </View>
