@@ -24,15 +24,21 @@ import {
     TouchableOpacity,
     Image,
     InputText,
-    ScrollView
+    ScrollView,
+    TouchableHighlight,
+    Animated
 } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Accordion = require('react-native-accordion');
+
 var styles = require('../styles/home_styles.js');
+var MakeUp = require('./makeup_accordion.js');
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
         super(props);
+
+
         this.state = {
             check: true
         };
@@ -62,35 +68,9 @@ class Home extends Component {
         }
     }
 
-    /**
-     * Render accordion makeup to display its children components
-     *
-     */
-    _renderMakeUp() {
-    var header = (
-      <View>
-        <Icon name="chevron-right" size={15} color="#212424"/>
-      </View>
-    );
+    toggle(){
 
-    var content = (
-      <View style={{}} >
-        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text ></View>
-        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text ></View>
-        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text ></View>
-        <View><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text ></View>
-        <View><Text style={styles.makeupComp_text}>Cọ Và Các Phụ Kiện Khác</Text ></View>
-      </View>
-    );
-
-    return (
-      <Accordion
-        header={header}
-        content={content}
-        easing="easeOutCubic"
-      />
-    );
-  }
+    }
 
     /**
      * Render the drawer page
@@ -98,23 +78,25 @@ class Home extends Component {
      */
     _navigationView() {
         return (
-            <View style={styles.drawerLayout}>
+            <ScrollView style={styles.drawerLayout}>
                 <View style={styles.imageLayout}>
                     <Image resizeMode='contain'
                            style={styles.image_view}
                            source={{uri: 'http://artdeco.com.vn/skin/frontend/default/artdeco.ver3.2/images/logo.png'}}/>
                 </View>
                 <View style={styles.line}></View>
-                <View style={styles.makeup_layout}>
-                  <View style={{flex:0.7, marginLeft: 15}}>
-                    <Text style={styles.makeup_text}>Trang Điểm</Text>
-                  </View>
-                  <View style={{flex:0.3, marginRight: 15}}>
-                    {this._renderMakeUp()}
-                  </View>
+                <View style={styles.accordion_container}>
+                  <MakeUp title="Trang Điểm"
+                          style={styles.accordion_padding}>
+                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Cọ Và Dụng Cụ Khác</Text></TouchableOpacity>
+                  </MakeUp>
                 </View>
                 <View style={styles.line}></View>
-            </View>
+            </ScrollView>
         );
     }
 

@@ -48,9 +48,10 @@ module.exports = StyleSheet.create({
     },
     makeupComp_text: {
       color: '#110e0e',
-      fontSize: 15
+      fontSize: 17
     },
     makeup_layout: {
+      flex: 1,
       marginTop: 4,
       marginBottom: 4,
       justifyContent: 'center',
@@ -71,6 +72,43 @@ module.exports = StyleSheet.create({
     image_view: {
       width: width * 3 / 4 - 40,
       height: height / 4 - 50
+    },
+    accordion_container: {
+      marginTop: 5,
+      marginBottom: 5
+    },
+    accordion_padding: {
+      justifyContent: 'center',
+      alignItems: 'flex-start'
+    },
+    accordion_comp: {
+      marginLeft: 40,
+      padding: 2
+    },
+    title_container: {
+      alignItems: 'flex-start',
+      flex: 0.9,
+      marginLeft: 20
+    },
+    icon_container: {
+      flex: 0.1,
+      marginLeft: 15,
+      alignItems: 'flex-end',
+      marginRight: 20
+    },
+    icon_view: {
+      height: 30,
+      width: 20
+    },
+    children_container: {
+      padding: 5,
+      paddingTop: 0
+    },
+    makeup_container:
+    {
+      flex: 1,
+      marginTop: 3,
+      marginBottom: 3
     }
 
 });
