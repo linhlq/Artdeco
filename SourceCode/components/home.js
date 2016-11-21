@@ -30,17 +30,22 @@ import {
 } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var Accordion = require('react-native-accordion');
-
 var styles = require('../styles/home_styles.js');
-var AccordionCustom = require('./accordion_container.js');
 var {height, width} = Dimensions.get('window');
 class Home extends Component {
     constructor(props) {
         super(props);
 
+        this.icons = {
+            'up'    : require('../image/keyboard_arrow_right_black_192x192.png'),
+            'down'  : require('../image/keyboard_arrow_down_black_192x192.png')
+        };
 
         this.state = {
-            check: true
+            check: true,
+            expand: true,
+            accordionColor: "#f4f4f4",
+            accordionAnimation: "bounceInLeft",
         };
     }
 
@@ -69,7 +74,19 @@ class Home extends Component {
     }
 
     toggle(){
-
+      if (this.state.expand===true) {
+        this.setState({
+          accordionColor: '#9bfee3',
+          accordionAnimation: "bounceInLeft",
+          expand: false
+        })
+      }else{
+          this.setState({
+            accordionColor: "#f4f4f4",
+            accordionAnimation: "bounceOutRight",
+            expand: true
+          })
+        }
     }
 
     /**
@@ -77,6 +94,70 @@ class Home extends Component {
      *
      */
     _navigationView() {
+        let icon = this.icons['down'];
+
+        if(this.state.expand){
+            icon = this.icons['up'];
+        }
+
+        var makeup = (
+          <View style={{marginLeft: 15, justifyContent: 'center', flexDirection: 'row'}}>
+            <View >
+              <Text style={{color: this.state.accordionColor, fontSize: 22, fontWeight: 'bold'}}>Trang Điểm</Text>
+            </View>
+            <View style={{marginLeft: 120}}>
+              <Image style={{height: 30, width: 35, tintColor  : this.state.accordionColor}}
+                     source={icon}>
+              </Image>
+            </View>
+          </View>
+        );
+
+        var makeupContent = (
+          <Animatable.View  style={{marginLeft: 60, padding: 10}}
+                            animation= {this.state.accordionAnimation}
+                            duration={500}>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Sản Phẩm Cho Mắt</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Sản Phẩm Cho Mặt</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Sản Phẩm Cho Môi</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Sản Phẩm Cho Móng</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Cọ Và Các Phụ Kiện Khác</Text></Animatable.View>
+          </Animatable.View>
+        );
+
+        var product = (
+          <View style={{marginLeft: 15, justifyContent: 'center', flexDirection: 'row'}}>
+            <View >
+              <Text style={{color: this.state.accordionColor, fontSize: 22, fontWeight: 'bold'}}>Sản Phẩm Dưỡng</Text>
+            </View>
+            <View style={{marginLeft: 62}}>
+              <Image style={{height: 30, width: 35, tintColor  : this.state.accordionColor}}
+                     source={icon}>
+              </Image>
+            </View>
+          </View>
+        );
+
+        var productContent = (
+          <Animatable.View  style={{marginLeft: 60, padding: 10}}
+                            animation= {this.state.accordionAnimation}
+                            duration={500}>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Chăm Sóc Da Mắt</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Chăm Sóc Cơ Thể</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Chăm Sóc Da Tay</Text></Animatable.View>
+            <Animatable.View  animation= {this.state.accordionAnimation}
+                              duration={500}><Text style={{color: this.state.accordionColor, fontSize: 18, padding: 10}}>Chăm Sóc Da Chân</Text></Animatable.View>
+          </Animatable.View>
+        );
+
         return (
             <ScrollView style={styles.drawerLayout}>
                 <View style={styles.imageLayout}>
@@ -84,33 +165,25 @@ class Home extends Component {
                            style={styles.image_view}
                            source={{uri: 'http://artdeco.com.vn/skin/frontend/default/artdeco.ver3.2/images/logo.png'}}/>
                 </View>
-                <View style={styles.line}></View>
-                <View style={styles.accordion_container}>
-                  <AccordionCustom title="Trang Điểm"
-                                   style={styles.accordion_padding}>
-                    <View style={{flex: 1, flexDirection: 'column'}}>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mắt</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Mặt</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Môi</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Sản Phẩm Cho Móng</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Cọ Và Dụng Cụ Khác</Text></TouchableOpacity>
-                    </View>
-                  </AccordionCustom>
-                </View>
-                <View style={styles.line}></View>
-                <View style={styles.accordion_container}>
-                  <AccordionCustom title="Sản Phẩm Dưỡng"
-                                   style={styles.accordion_padding}>
-                    <View style={{flex: 1, flexDirection: 'column'}}>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Mặt</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Cơ Thể</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Tay</Text></TouchableOpacity>
-                      <TouchableOpacity style={styles.accordion_comp}><Text style={styles.makeupComp_text}>Chăm Sóc Da Chân</Text></TouchableOpacity>
-                    </View>
-                  </AccordionCustom>
-                </View>
-                <View style={{backgroundColor: '#0a0e0a', marginTop: 3, width: width * 3 / 4 + 40, borderTopWidth: 1, borderColor: '#706b6e'}}>
-
+                <View style={{flex: 1, backgroundColor: '#000000'}}>
+                  <View style={styles.accordion_container}>
+                    <Accordion
+                      header={makeup}
+                      content={makeupContent}
+                      easing="easeOutCubic"
+                      onPress={() => {this.toggle()}}
+                    />
+                  </View>
+                  <View style={styles.line}></View>
+                  <View style={styles.accordion_container}>
+                    <Accordion
+                      header={product}
+                      content={productContent}
+                      easing="easeOutCubic"
+                      onPress={() => {this.toggle()}}
+                    />
+                  </View>
+                  <View style={styles.line}></View>
                 </View>
             </ScrollView>
         );

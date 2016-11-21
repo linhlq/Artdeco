@@ -39,7 +39,7 @@ module.exports = StyleSheet.create({
     line: {
       marginLeft: 15,
       borderWidth: 1,
-      borderColor: '#212121',
+      borderColor: '#ffffff',
       width: width * 3 / 4 + 11
     },
     makeup_text: {
@@ -60,22 +60,23 @@ module.exports = StyleSheet.create({
     },
     drawerLayout: {
       flex: 1,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#000000',
       flexDirection: 'column'
     },
     imageLayout: {
       width: width * 3 / 4 + 40,
       height: height / 4 - 10,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: '#ffffff'
     },
     image_view: {
       width: width * 3 / 4 - 40,
       height: height / 4 - 50
     },
     accordion_container: {
-      marginTop: 5,
-      marginBottom: 5
+      marginTop: 10,
+      marginBottom: 10
     },
     accordion_padding: {
       flex: 1,
