@@ -11,8 +11,9 @@ import React, {Component} from 'react';
 import DrawerLayout from 'react-native-drawer-layout';
 import * as Animatable from 'react-native-animatable';
 import Collapsible from 'react-native-collapsible';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import GridView from "react-native-easy-grid-view";
+import { Container, Header, InputGroup,Icon, Input, Button } from 'native-base';
 import {
     AppRegistry,
     StyleSheet,
@@ -205,7 +206,7 @@ class Home extends Component {
                     <View style={styles.bar_layout}>
                         <View style={styles.bar_view}>
                             <TouchableNativeFeedback onPress ={() => {this._openMenu()}}>
-                                <Icon name="bars" size={32} color="#fbfcfc"/>
+                                <IconAwesome name="bars" style={{color: '#FAFAFA', fontSize: 32}}/>
                             </TouchableNativeFeedback>
                         </View>
                         <View style={styles.artdeco_view}>
@@ -213,19 +214,24 @@ class Home extends Component {
                         </View>
                         <View style={styles.shopping_view}>
                             <TouchableNativeFeedback>
-                                <Icon name="shopping-cart" size={32} color="#fbfcfc"/>
+                                <IconAwesome name="shopping-cart" size={32} color="#fbfcfc"/>
                             </TouchableNativeFeedback>
                         </View>
                     </View>
                     <ScrollView style={styles.page_layout}>
-                      <TextInput
-                        style={{height: 40, borderColor: '#ecede7', borderWidth: 2, marginTop: 10, marginLeft: 40, marginRight: 40, borderBottomColor: '#b0b8b6'}}
-                        onChangeText={(text) => this.setState({text})}
-                        value={this.state.text}
-                        underlineColorAndroid="#ecede7"
-                        placeholder = "Search..."
-                        placeholderColor = "#b0b8b6"
-                      />
+                        <Container>
+                            <Header searchBar rounded
+                                    style={{backgroundColor: 'black'}}>
+                                <InputGroup>
+                                    <Icon name="ios-search" />
+                                    <Input placeholder="Search" />
+                                    <Icon name="ios-people" />
+                                </InputGroup>
+                                <Button transparent>
+                                    Search
+                                </Button>
+                            </Header>
+                        </Container>
                     </ScrollView>
                 </View>
             </DrawerLayout>
